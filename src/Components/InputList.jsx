@@ -1,4 +1,3 @@
-import React from "react";
 import useListStore from "../stores/useListStore";
 
 const InputList = () => {
@@ -60,5 +59,10 @@ const InputList = () => {
     </div>
   );
 };
+
+import React from 'react'
+
+
+
 
 export default InputList;

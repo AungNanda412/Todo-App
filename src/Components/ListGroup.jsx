@@ -1,4 +1,3 @@
-import React from "react";
 import useListStore from "../stores/useListStore";
 import IsList from "./IsList";
 

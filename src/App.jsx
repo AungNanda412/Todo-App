@@ -1,7 +1,7 @@
 import { useState } from "react";
-import InputList from "./components/InputList";
-import AddList from "./components/AddList";
-import ListGroup from "./components/ListGroup";
+import InputList from "./components/InputList.jsx";
+import AddList from "./components/AddList.jsx";
+import ListGroup from "./components/ListGroup.jsx";
 import "animate.css";
 
 function App() {
