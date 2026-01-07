@@ -4,21 +4,18 @@ const InputList = () => {
   const { addLists, setInputValue, inputValue } = useListStore();
 
   const handleClick = () => {
-    if (inputValue != 0) {
+    if (inputValue && inputValue.trim() !== "") {
       const newList = {
         id: Date.now(),
         task: inputValue,
         completed: false,
       };
-      setInputValue("")
+      setInputValue("");
       addLists(newList);
-      console.log(newList);
-      
     }
   };
 
   const handleChange = (e) => {
-    console.log(e.target.value);
     setInputValue(e.target.value);
   };
 
@@ -59,10 +56,5 @@ const InputList = () => {
     </div>
   );
 };
-
-import React from 'react'
-
-
-
 
 export default InputList;
