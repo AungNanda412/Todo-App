@@ -1,12 +1,19 @@
 import React from "react";
 import useListStore from "../stores/useListStore";
+import useSWR from "swr";
+
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 const AddList = () => {
-  const {
-    lists,
-    getDoneTotal,
-  } = useListStore();
-  const {done} = getDoneTotal();
+  // const {
+  //   lists,
+  //   getDoneTotal,
+  // } = useListStore();
+  // const {done} = getDoneTotal();
+  const { data: lists=[] } = useSWR("http://localhost:8000/lists", fetcher);
+
+  const done = lists.filter((el) => el.completed).length
+
   return (
     <div className="flex justify-between mb-5">
       <h3 className="text-2xl font-bold">Your List</h3>

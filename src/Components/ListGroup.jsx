@@ -1,16 +1,34 @@
+import useSWR, { useSWRConfig } from "swr";
 import useListStore from "../stores/useListStore";
 import IsList from "./IsList";
 
-const ListGroup = () => {
-  const { lists, toggleList, removeList } = useListStore();
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-  const handleCheckOnChange = (id) => {
-    toggleList(id);
+const ListGroup = () => {
+  // const {toggleList, removeList } = useListStore();
+  const { data: lists } = useSWR("http://localhost:8000/lists", fetcher);
+  const { mutate } = useSWRConfig();
+
+  const handleCheckOnChange = async (el) => {
+    await fetch(`http://localhost:8000/lists/${el.id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        completed: !el.completed,
+      }),
+    });
+
+    mutate("http://localhost:8000/lists");
   };
 
-  const handleDelete = (id) => {
-    removeList(id);
-  }
+  const handleDelete = async (id) => {
+    // removeList(id);
+    await fetch(`http://localhost:8000/lists/${id}`, {
+      method: "DELETE",
+    });
+
+    mutate("http://localhost:8000/lists");
+  };
 
   return (
     <div id="listGroup">
@@ -24,7 +42,7 @@ const ListGroup = () => {
             <div className="content flex items-center gap-3">
               <input
                 checked={el.completed}
-                onChange={() => handleCheckOnChange(el.id)}
+                onChange={() => handleCheckOnChange(el)}
                 className="list-check accent-neutral-700 w-4 h-4"
                 type="checkbox"
               />
@@ -37,9 +55,10 @@ const ListGroup = () => {
               </p>
             </div>
             <div className="control opacity-100 pointer-events-none duration-300 translate-x-[100px] group-hover:pointer-events-auto group-hover:opacity-100 group-hover:translate-x-0 flex gap-1">
-              
-              <button className="list-del duration-300 active:scale-75" onClick={() => handleDelete(el.id)}>
-
+              <button
+                className="list-del duration-300 active:scale-75"
+                onClick={() => handleDelete(el.id)}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

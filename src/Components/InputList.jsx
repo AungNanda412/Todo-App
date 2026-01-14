@@ -1,21 +1,42 @@
+import { useSWRConfig } from "swr";
 import useListStore from "../stores/useListStore";
 
 const InputList = () => {
   const { addLists, setInputValue, inputValue } = useListStore();
+  const {mutate} = useSWRConfig();
 
-  const handleClick = () => {
-    if (inputValue && inputValue.trim() !== "") {
-      const newList = {
-        id: Date.now(),
+  const handleClick = async() => {
+    if (inputValue) {
+      const newList = JSON.stringify({
+        // id: Date.now(),
         task: inputValue,
         completed: false,
-      };
-      setInputValue("");
-      addLists(newList);
+      });
+
+      const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    const res = await fetch("http://localhost:8000/lists", {
+      method: "POST",
+      headers: myHeaders,
+      body: newList,
+      redirect: "follow",
+    });
+
+    const json = await res.json();
+
+
+      setInputValue("")
+      addLists(json);
+      console.log(json);
+
+      mutate("http://localhost:8000/lists")
+      
     }
   };
 
   const handleChange = (e) => {
+    console.log(e.target.value);
     setInputValue(e.target.value);
   };
 
@@ -56,5 +77,10 @@ const InputList = () => {
     </div>
   );
 };
+
+import React from 'react'
+
+
+
 
 export default InputList;
