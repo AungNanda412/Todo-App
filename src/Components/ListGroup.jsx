@@ -1,6 +1,9 @@
 import useSWR, { useSWRConfig } from "swr";
 import useListStore from "../stores/useListStore";
-import IsList from "./IsList";
+import IsList from "../Components/IsList";
+
+
+
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -36,28 +39,32 @@ const ListGroup = () => {
       {lists &&
         lists.map((el) => (
           <div
-            className={`group animate__animated animate__fadeInLeft border mb-3 overflow-hidden border-neutral-700 p-5 flex justify-between items-center`}
+            className={`group animate__animated animate__fadeInLeft pixel-border mb-3 overflow-hidden p-5 flex justify-between items-center transition-all duration-200 ${el.completed ? 'border-[#b2e8b9] bg-[#f0f8ff]': 'border-[#a8d8ea] bg-[#ffffff]'}`}
+            
             key={el.id}
           >
             <div className="content flex items-center gap-3">
               <input
                 checked={el.completed}
                 onChange={() => handleCheckOnChange(el)}
-                className="list-check accent-neutral-700 w-4 h-4"
+                className="list-check w-4 h-4"
+                style={{ accentColor: '#b2e8b9' }}
                 type="checkbox"
               />
               <p
                 className={`${
-                  el.completed ? "line-through text-gray-400" : ""
+                  el.completed ? "line-through" : ""
                 }`}
+                style={{ color: el.completed ? '#a8d8ea' : '#6b5b95' }}
               >
                 {el.task}
               </p>
             </div>
-            <div className="control opacity-100 pointer-events-none duration-300 translate-x-[100px] group-hover:pointer-events-auto group-hover:opacity-100 group-hover:translate-x-0 flex gap-1">
+            <div className="control opacity-100 pointer-events-none duration-300 translate-x-25 group-hover:pointer-events-auto group-hover:opacity-100 group-hover:translate-x-0 flex gap-1">
               <button
                 className="list-del duration-300 active:scale-75"
                 onClick={() => handleDelete(el.id)}
+                style={{ color: '#f0c3c3' }}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

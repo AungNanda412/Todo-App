@@ -1,1 +1,42 @@
 @import "tailwindcss";
+
+/* Calm & Pixel Theme */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+:root {
+  --pixel-color-primary: #b4e7ff;
+  --pixel-color-secondary: #a8d8ea;
+  --pixel-color-accent: #ffc6b9;
+  --pixel-color-dark: #6b5b95;
+  --pixel-color-light: #f0f8ff;
+  --pixel-color-success: #b2e8b9;
+  --pixel-color-danger: #f0c3c3;
+}
+
+body {
+  background: linear-gradient(135deg, #f0f8ff 0%, #b4e7ff 100%);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Pixel-style border effect */
+.pixel-border {
+  border-width: 3px;
+  border-style: solid;
+  box-shadow: 4px 4px 0px rgba(107, 91, 149, 0.1);
+}
+
+.pixel-btn {
+  position: relative;
+  border-width: 3px;
+  border-style: solid;
+  transition: all 0.1s ease;
+}
+
+.pixel-btn:active {
+  box-shadow: 1px 1px 0px rgba(107, 91, 149, 0.2);
+  transform: translate(3px, 3px);
+}

@@ -5,7 +5,7 @@ import "animate.css";
 
 function App() {
   return (
-    <div className="w-[400px] m-auto mt-16">
+    <div className="w-100 min-h-screen m-auto mt-16">
       <InputList />
       <AddList />
       <ListGroup />

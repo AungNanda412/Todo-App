@@ -43,20 +43,24 @@ const InputList = () => {
   return (
     <div className="">
       <div>
-        <h1 className="font-bold text-4xl font-serif">Todo App</h1>
+        <h1 className="font-bold text-4xl mb-2 font-[Pixeboy]" style={{ color: '#6b5b95', letterSpacing: '2px' }}>Todo App</h1>
+        <div className="h-1 mb-5" style={{ background: 'linear-gradient(90deg, #b4e7ff, #ffc6b9, #b2e8b9)' }}></div>
       </div>
-      <div className="flex mb-5 mt-5">
+      <div className="flex mb-5 mt-5 gap-2">
         <input
           value={inputValue}
           onChange={handleChange}
-          className="flex-grow border border-neutral-700 h-14 px-3 focus-visible:outline-none"
+          className="grow pixel-border h-14 px-3 focus-visible:outline-none"
+          style={{ borderColor: '#a8d8ea', backgroundColor: '#f0f8ff' }}
           type="text"
           id="textInput"
+          placeholder="Add a new task..."
         />
         <button
           onClick={handleClick}
           id="addBtn"
-          className="h-14 w-14 bg-neutral-700 text-white flex justify-center items-center active:scale-95 duration-200"
+          className="h-14 w-14 pixel-btn flex justify-center items-center"
+          style={{ borderColor: '#b4e7ff', backgroundColor: '#b2e8b9', color: '#6b5b95' }}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
